@@ -17,43 +17,39 @@ function write_log {
 }
 
 printUsage(){
-     echo "################################################################################################################"
-     echo "# $0          "
-     echo "# does automatically print all attachments of the given e-mail addresses            "
-     echo "# usage: $0 configfilenam"
-     echo "#             "
-     echo "#             "
-     echo "#             "
-     echo "#    the config file has 1 configline per e-mail containing the following parameters:         "
-     echo "#    param 1:  mail-server         "
-     echo "#    param 2:  mail-address         "
-     echo "#    param 3:  password         "
-     echo "#    param 4:  printserver     "
-     echo "#    param 5:  printqueue         "
-     echo "#    param 6:  attachment types (.pdf.jpg.gif.png)         "
-     echo "#    param 7:  copies                                      "
-     echo "#    param 8:  keep mail on Server (Y/N)                  "
-     echo "#    param 9:  folder  (optional parameter if folder is set only this mail-folder will be downloaded  "
-     echo "#             "
-     echo "#             "
-     echo "#             "
-     echo "################################################################################################################"
-     echo "################################################################################################################"
+     echo "# Error with config file, usage ./script config.cfg
      exit 1
 }
 processMail(){
-       IFS=' ' read mailServer mailAddress passwd printServer printQueue attachmentTypes copies keepOnServer imapfolder <<< "$configLine"
+       IFS=' ' read mailServer ssl mailAddress passwd printServer printQueue attachmentTypes copies keepOnServer imapfolder <<< "$configLine"
        echo "set no syslog" > "$fetchmailrc"
+      
+      #****   		EDIT NEXT LINE	 	****
        echo "set logfile /home/user/AutPrintMailAttachments/workdir/logfile.log" >> "$fetchmailrc"
        echo "poll $mailServer proto imap" >> "$fetchmailrc"
+       
+
+       
+       
        echo "           user   $mailAddress pass  $passwd " >> "$fetchmailrc"
+       
        if [[ $imapfolder == "" ]]; then 
          echo ""
        else
          echo "    folder $imapfolder" >> "$fetchmailrc"
        fi
+       
+       if [[ $ssl == "N" ]]; then 
+         echo ""
+       else
+         echo "ssl" >> "$fetchmailrc"
+       fi
+       
        cp "$fetchmailrc" /tmp/tomFetchmailrc
 
+       
+       
+       
        if [[ $keepOnServer == "Y" ]]; then 
 		/usr/bin/fetchmail -f "$fetchmailrc" --keep --bsmtp "$tmpMailFile"
        else
@@ -67,7 +63,7 @@ processMail(){
      for f in *; do
         if [[ $f == "*"  ]];then 
            echo ""
-           echo " ... wird nicht bearbeitet: $f"
+           echo " ..this is a not done correct: $f"
         else
           nfile=$(echo $f | tr ' ' '_')
           if [[ "$f" == "$nfile" ]];then 
@@ -75,7 +71,7 @@ processMail(){
           else
 		mv "$f" "$nfile" 
           fi
-           #echo " ..bearbeitet: $f"
+           #echo "....this is done correctly: $f"
            #ltrim
            f=$(echo $nfile | sed 's/^[ \t]*//')
            #rtrim
@@ -89,7 +85,7 @@ processMail(){
                 fi
 
 		renderedFile=$( echo "$tmpRenderedMailPrintFolder/$f.autoprint.ps" )
-                #echo "renderedFile liegt hier: $renderedFile"
+                #echo "renderedFile is placed here: $renderedFile"
 	        pdftops -paper A4 "$f" "$renderedFile"
                 until [ $counter -gt $copies ] 
                 do 
@@ -144,11 +140,11 @@ while read LINE ; do
              rm -f "$tmpMailFile" 
       	 fi 
          if [[ $tmpMailPrintFolder == "$autoprintBaseDir"* ]]; then 
-         #     echo "jetzt wird der tmpMailfolder geloesch"
+         #     echo "tmp folder will be deleted now"
 		rm -Rf "$tmpMailPrintFolder" 
       	 fi 
          if [[ $tmpRenderedMailPrintFolder == "$autoprintBaseDir"* ]]; then 
-         #     echo "jetzt wird der tmpMailfolder geloesch"
+         #     echo "tmp folder will be deleted now"
                 ls -la  "$tmpRenderedMailPrintFolder"    >> /tmp/tom.render
 		rm -Rf "$tmpRenderedMailPrintFolder"
       	 fi 
