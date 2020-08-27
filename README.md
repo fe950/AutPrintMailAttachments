@@ -1,10 +1,12 @@
 # autoprint
-autoprint is a shell script for autoamtically printing email-attachments to a printer   
+autoprint is a shell script for automatically printing all new email-attachments from gmail to a printer.
 
-supported file types: pdf,jpg,png
-supported printers: all postscript printers ... you can add multiple printer-types with cups
-
-it does automatically print all attachments of the given e-mail addresses         
+Connects to gmail with fetchmail using imap and download new pdf atachments and prints them to a cups printer.
+Leave email at server and mark them as read.
+Also support pdf,jpg,png, change filetypes in autoprint.cfg
+Supported printers: all postscript printers ... you can add multiple printer-types with cups
+Supports pop3 and imap and imap with ssl
+       
 
 
 files: autoprint .... shell script
