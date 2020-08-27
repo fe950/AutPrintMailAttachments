@@ -104,7 +104,7 @@ Attention: don't forget to config the logrotate !
    
    ##### Future plans.
    
-   ##### Simple and free form for notification on Iphone
+    Simple and free form for notification on Iphone
    Sends confirmation mail to icloud mail ( I dont use that mail for anything else)
    Set up sender as a VIP sender so i can get notifications on iphone that there is something new in the printer.
    
