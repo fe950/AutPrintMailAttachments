@@ -9,9 +9,8 @@ It's 99% a copy of thomasX/autoprint work, I just made it work with gmail in 202
 
 
 #### how does it work
-In this configuration it's setup for gmail, with imap, printing pdf to a cups printer
-It uses fetchmail to download new attachments, leave messages on server and mark it read. 
-Then using uudeview to render files and print it with lpr
+In this configuration it use fetchmail to connect to gmail with imap and download new attachments, leave messages on server and mark it read. 
+Then using uudeview to render file(s) and print with lpr to a postscript Cups printer
 It can be scheduled to run at intervalls with cron.
 
 
@@ -84,4 +83,7 @@ we use syslog logging... if you want to put all printlogging to a customized fil
 Attention: don't forget to config the logrotate ! 
 
    
+   #### debug mode
    
+   change #!/bin/bash 
+   to #!/bin/bash -xv
