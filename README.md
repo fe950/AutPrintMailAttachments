@@ -50,8 +50,8 @@ The config file has 1 configline containing the following parameters:
 
  
     ####This is config file
- > # mailserver servertype ssl e-mail  password  lprhost lprqueue attachmenttypes copies keepOnServer imapFolder    
-       imap.gmail.com imap ssl username@gmail.com Your¤#"SecrtPswd 127.0.0.1 Brother_Printer .pdf 1 Y
+'# mailserver servertype ssl e-mail  password  lprhost lprqueue attachmenttypes copies keepOnServer imapFolder    
+       imap.gmail.com imap ssl username@gmail.com Your¤#"SecrtPswd 127.0.0.1 Brother_Printer .pdf 1 Y'
 
     
 
