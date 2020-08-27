@@ -1,1 +1,2 @@
-
+#Empty logfile needs to exist for Fetchmail to start first time.
+#Path to this file must also be edited in main script so fetchmail log to this file
