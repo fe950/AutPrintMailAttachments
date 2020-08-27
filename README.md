@@ -67,7 +67,7 @@ crontab -e
 
 Add this line to the buttom to make it run every 10 minutes (I read that google will make you log in with a captcha if you run it more frequently)
 ```
-*/10 * * * * /pathto/AutPrintMailAttachements /path to configfile.cfg
+*/10 * * * * /pathto/AutPrintMailAttachements /pathto/configfile.cfg
 ```
 
 
