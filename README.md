@@ -47,8 +47,8 @@ The config file has 1 configline containing the following parameters:
     param 9:  copies           (1,2,3...)                           
     param 10:  keep mail on Server (Y/N)                  
     param 11:  folder  (optional parameter if folder is set only this mail-folder will be downloaded  
-   
-    
+   ```
+    ```
     ####This is config file
    # mailserver servertype ssl e-mail  password  lprhost lprqueue attachmenttypes copies keepOnServer imapFolder    
        imap.gmail.com imap ssl username@gmail.com Your¤#"SecrtPswd 127.0.0.1 Brother_Printer .pdf 1 Y
