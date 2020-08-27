@@ -17,8 +17,8 @@ It can be scheduled to run at intervalls with cron.
 
 #### files used:
 ```
-autoprint
-autoprint.cfg
+AutPrintMailattachments
+config.cfg
 workingdir/logfile.log
 ```
 
@@ -34,7 +34,7 @@ workingdir/logfile.log
        
 #### config file
 
-The config file has 1 configline containing the following parameters:         
+The config file has 1 line that contains the following parameters:         
 
     param 1:  mail-server 
     param 2:  server type (imap/pop3)
@@ -59,7 +59,7 @@ The config file has 1 configline containing the following parameters:
 ```
 Edit 2 lines in script to correct paths.
 Edit line starting with "autoprintBaseDir="
-Edit line in script that starts with "echo "set logfile"
+Edit line starting with "echo "set logfile"
 ```
 
 #### make it run automatically
