@@ -2,7 +2,8 @@
 
 configFile=$1
 usageError="n"
-autoprintBaseDir="/usr/local/autoprint"
+#Edit next line to match your path
+autoprintBaseDir="/home/user/AutPrintMailAttachments/workdir"
 tmpMailFile=""
 tmpMailPrintFolder=""
 tmpRenderedMailPrintFolder=""
@@ -43,7 +44,7 @@ printUsage(){
 processMail(){
        IFS=' ' read mailServer mailAddress passwd printServer printQueue attachmentTypes copies keepOnServer imapfolder <<< "$configLine"
        echo "set no syslog" > "$fetchmailrc"
-       echo "set logfile /var/log/fetchmail.log" >> "$fetchmailrc"
+       echo "set logfile /home/user/AutPrintMailAttachments/workdir/logfile.log" >> "$fetchmailrc"
        echo "poll $mailServer proto imap" >> "$fetchmailrc"
        echo "           user   $mailAddress pass  $passwd " >> "$fetchmailrc"
        if [[ $imapfolder == "" ]]; then 
