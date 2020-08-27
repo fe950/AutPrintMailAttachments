@@ -21,17 +21,28 @@ printUsage(){
      exit 1
 }
 processMail(){
-       IFS=' ' read mailServer ssl mailAddress passwd printServer printQueue attachmentTypes copies keepOnServer imapfolder <<< "$configLine"
+       IFS=' ' read mailServer servertype ssl mailAddress passwd printServer printQueue attachmentTypes copies keepOnServer imapfolder <<< "$configLine"
        echo "set no syslog" > "$fetchmailrc"
       
       #****   		EDIT NEXT LINE	 	****
        echo "set logfile /home/user/AutPrintMailAttachments/workdir/logfile.log" >> "$fetchmailrc"
-       echo "poll $mailServer proto imap" >> "$fetchmailrc"
-       
+      
+      
+       echo "poll $mailServer " >> "$fetchmailrc"
+      
+      if [[ $servertype == "pop3" ]]; then 
+         echo "  proto  pop3" >> "$fetchmailrc"
+       else
+         echo "  proto  imap" >> "$fetchmailrc" >> "$fetchmailrc"
+       fi
 
+              if [[ $ssl == "N" ]]; then 
+         echo ""
+       else
+         echo "  ssl" >> "$fetchmailrc"
+       fi
        
-       
-       echo "           user   $mailAddress pass  $passwd " >> "$fetchmailrc"
+       echo " user $mailAddress   pass $passwd " >> "$fetchmailrc"
        
        if [[ $imapfolder == "" ]]; then 
          echo ""
@@ -39,11 +50,7 @@ processMail(){
          echo "    folder $imapfolder" >> "$fetchmailrc"
        fi
        
-       if [[ $ssl == "N" ]]; then 
-         echo ""
-       else
-         echo "ssl" >> "$fetchmailrc"
-       fi
+
        
        cp "$fetchmailrc" /tmp/tomFetchmailrc
 
