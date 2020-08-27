@@ -8,12 +8,24 @@ It's 99% a copy of thomasX/autoprint work, I just made it work with gmail in 202
 
 
 
-#### how does it work
+#### what does it do 
+Monitor gmail for new attachments and automatically print them.
 In this configuration it use fetchmail to connect to gmail with imap and download new attachments.
 It leaves the messages on server and mark it read. 
 Then using uudeview to render file and print with lpr to a postscript Cups printer
-It can be scheduled to run at intervalls with cron.
 
+
+#### how does it work
+it uses fetchmail to connect to mailserver with imap, download attachment, marks it read on server, render it with uudeview and send it to a printer with lpr
+
+
+#### what can it do
+Connect to both pop3 and imap mailservers.
+ssl support
+Delete or leave messages on server.
+Download pdf, jpg or png files.
+Decide where to prints them and how many. 
+It can be scheduled to run at intervalls with cron.
 
 #### files used:
 ```
@@ -88,3 +100,11 @@ Attention: don't forget to config the logrotate !
    
    change #!/bin/bash 
    to #!/bin/bash -xv
+   
+   
+   ##### Future plans.
+   
+   ##### Simple and free form for notification on Iphone
+   Sends confirmation mail to icloud mail ( I dont use that mail for anything else)
+   Set up sender as a VIP sender so i can get notifications on iphone that there is something new in the printer.
+   
