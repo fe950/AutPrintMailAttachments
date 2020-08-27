@@ -3,14 +3,15 @@
 
 
 This is a shell script for automatically printing email attachments.
-It's 99% a copy of thomasX/autoprint work, I just made it work with gmail in 2020 and make it easier to get started for beginners.
+It's 99% a copy of thomasX/autoprint work, I just made it work with gmail in 2020 and made it easier to get started with for beginners.
 
 
 
 
 #### how does it work
-In this configuration it use fetchmail to connect to gmail with imap and download new attachments, leave messages on server and mark it read. 
-Then using uudeview to render file(s) and print with lpr to a postscript Cups printer
+In this configuration it use fetchmail to connect to gmail with imap and download new attachments.
+It leaves the messages on server and mark it read. 
+Then using uudeview to render file and print with lpr to a postscript Cups printer
 It can be scheduled to run at intervalls with cron.
 
 
@@ -49,8 +50,8 @@ The config file has 1 configline containing the following parameters:
 
  
     ####This is config file
- '# mailserver servertype ssl e-mail  password  lprhost lprqueue attachmenttypes copies keepOnServer imapFolder    
-       imap.gmail.com imap ssl username@gmail.com Your¤#"SecrtPswd 127.0.0.1 Brother_Printer .pdf 1 Y'
+ > # mailserver servertype ssl e-mail  password  lprhost lprqueue attachmenttypes copies keepOnServer imapFolder    
+       imap.gmail.com imap ssl username@gmail.com Your¤#"SecrtPswd 127.0.0.1 Brother_Printer .pdf 1 Y
 
     
 
