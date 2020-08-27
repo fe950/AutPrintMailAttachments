@@ -2,8 +2,10 @@
 
 configFile=$1
 usageError="n"
-#Edit next line to match your path
+
+      #****   		EDIT PATH IN NEXT LINE	 	****
 autoprintBaseDir="/home/user/AutPrintMailAttachments/workdir"
+
 tmpMailFile=""
 tmpMailPrintFolder=""
 tmpRenderedMailPrintFolder=""
@@ -24,39 +26,27 @@ processMail(){
        IFS=' ' read mailServer servertype ssl mailAddress passwd printServer printQueue attachmentTypes copies keepOnServer imapfolder <<< "$configLine"
        echo "set no syslog" > "$fetchmailrc"
       
-      #****   		EDIT NEXT LINE	 	****
+      #****   		EDIT PATH IN NEXT LINE	 	****
        echo "set logfile /home/user/AutPrintMailAttachments/workdir/logfile.log" >> "$fetchmailrc"
-      
-      
-       echo "poll $mailServer " >> "$fetchmailrc"
-      
+    
+    echo "poll $mailServer " >> "$fetchmailrc"
       if [[ $servertype == "pop3" ]]; then 
          echo "  proto  pop3" >> "$fetchmailrc"
        else
          echo "  proto  imap" >> "$fetchmailrc" >> "$fetchmailrc"
        fi
-
               if [[ $ssl == "N" ]]; then 
          echo ""
        else
          echo "  ssl" >> "$fetchmailrc"
        fi
-       
        echo " user $mailAddress   pass $passwd " >> "$fetchmailrc"
-       
        if [[ $imapfolder == "" ]]; then 
          echo ""
        else
          echo "    folder $imapfolder" >> "$fetchmailrc"
-       fi
-       
-
-       
+       fi 
        cp "$fetchmailrc" /tmp/tomFetchmailrc
-
-       
-       
-       
        if [[ $keepOnServer == "Y" ]]; then 
 		/usr/bin/fetchmail -f "$fetchmailrc" --keep --bsmtp "$tmpMailFile"
        else
