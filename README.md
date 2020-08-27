@@ -1,31 +1,49 @@
-# autoprint
-autoprint is a shell script for automatically printing all new email-attachments from gmail to a printer.
+# AutPrintMailAttachments 
 
-Connects to gmail with fetchmail using imap and download new pdf atachments and prints them to a cups printer.
-Leave email at server and mark them as read.
-Also support pdf,jpg,png, change filetypes in autoprint.cfg
-Supported printers: all postscript printers ... you can add multiple printer-types with cups
-Supports pop3 and imap and imap with ssl
-       
+This is a shell script for automatically printing email attachments.
+Its a copy of thomasX/autoprint work, I just made it work with gmail in 2020 and did some things to make it easier for beginners.
 
 
-files: autoprint .... shell script
+# how does it work
+In this configuration it's setup for gmail, with imap, printing pdf to a cups printer
+It uses fetchmail to download new attachments, leave messages on server and mark it read. 
+Then using uudeview to render files and print it with lpr
+
+
+
+# files used:
+       autoprint .... shell script
        autoprint.cfg ... config file
-
-the config file has 1 configline per e-mail containing the following parameters:         
-    param 1:  mail-server         
-    param 2:  mail-address         
-    param 3:  password         
-    param 4:  printserver     
-    param 5:  printqueue         
-    param 6:  attachment types (.pdf.jpg.gif.png)         
-    param 7:  copies                                      
-    param 8:  keep mail on Server (Y/N)                  
-    param 9:  folder  (optional parameter if folder is set only this mail-folder will be downloaded  
+       .../workingdir/logfile.log
+ 
+ 
+# dependencies that needs to be installed
+ fetchmail uudeview lpr
+          
+       
+# config file
+the config file has 1 configline containing the following parameters:         
+    param 1:  mail-server 
+    param 2:  server type (imap/pop3)
+    param 3:  ssl (Y/N)       (needed for gmail imap, no need to download certificate)    
+    param 4:  mail-address    (use full email adress for gmail, username@gmail.com)
+    param 5:  password         
+    param 6:  printserver     (hostname, ip, to cups server, postscript printer)
+    param 7:  printqueue      (name of printer in cups)   
+    param 8:  attachment types (.pdf.jpg.gif.png)         
+    param 9:  copies           (1,2,3...)                           
+    param 10:  keep mail on Server (Y/N)                  
+    param 11:  folder  (optional parameter if folder is set only this mail-folder will be downloaded  
+    
     
     
 # logging:    
     
+   Logging is done to workdir/logfile.log
+    
+ Following is from original author, I dont understand that it so I just leave it here untuched. :)
+ I think its not used when I logg to a single file in workdir.
+ 
 we use syslog logging... if you want to put all printlogging to a customized file add the following line to /etc/rsyslog.cong:
 :msg, contains ," autoprint-logging:"  /var/log/autprint.log
 
